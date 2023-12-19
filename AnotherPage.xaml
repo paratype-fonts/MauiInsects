@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiInsects.AnotherPage" NavigatedTo="ContentPage_NavigatedTo">
+    <Grid>
+        <Button 
+            Text="Go back and check if the scroll position hasn't changed" Clicked="Button_Clicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="CenterAndExpand" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiInsects.MainPage"
+             xmlns:fsm="clr-namespace:MauiInsects"
+             x:DataType="fsm:MainPageViewModel"
+>
+
+    <Grid RowDefinitions="135,*,45" Padding="0" Margin="0">
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Grid.Row="0" HorizontalOptions="Center" 
+               Text="OnScrolled reports:" FontSize="16"/>
+            <Label Grid.Row="0" HorizontalOptions="Center" 
+               Text="{Binding Path=FirstVisibleItemIndex, StringFormat='FirstVisibleItemIndex = {0}'}" FontSize="16"/>
+            <Label Grid.Row="0" HorizontalOptions="Center" 
+               Text="{Binding Path=LastVisibleItemIndex,  StringFormat='LastVisibleItemIndex  = {0}'}" FontSize="16"/>
+        </VerticalStackLayout>
+        <Grid Grid.Row="1">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" HorizontalOptions="Center"
+                            ItemSizingStrategy="MeasureFirstItem" Scrolled="CollectionView_Scrolled">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="0" Span="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="fsm:ItemObject">
+                        <Grid RowDefinitions="180,36" >
+                            <Frame Grid.Row="0" Padding="0,0,14,0" WidthRequest="360" CornerRadius="0" BackgroundColor="Transparent" BorderColor="LightYellow">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </Frame.GestureRecognizers>
+                                <!--<Image Source="{Binding ImageUrl}" WidthRequest="360" Aspect="AspectFit"/>-->
+                                <Label Text="{Binding Id}" FontSize="16" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+                                <HorizontalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </HorizontalStackLayout.GestureRecognizers>
+                                <Label Text="{Binding Name}" FontSize="16" />
+                                <Label Text="{Binding Path=Id, StringFormat=' #{0}'}" FontSize="16"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Text="Scroll down and click to navigate to another page" HorizontalOptions="Center" Command="{Binding OnNavigateCommand}"></Button>
+        </Grid>
+    </Grid>
+</ContentPage>
